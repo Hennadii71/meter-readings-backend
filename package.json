@@ -1,0 +1,36 @@
+{
+  "name": "meter-readings-backend",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Hennadii71/meter-readings-backend#readme",
+  "bugs": {
+    "url": "https://github.com/Hennadii71/meter-readings-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hennadii71/meter-readings-backend.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "cross-env": "^10.1.0",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "joi": "^18.2.9",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.0",
+    "morgan": "^1.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
