@@ -4,7 +4,8 @@ export const handleSaveError = (error, data, next) => {
   next();
 };
 
-export const addUpdateSettings = (next) => {
-  this.option.new = true;
-  this.option.runValidators = true;
+export const addUpdateSettings = async function () {
+  this.options = this.options || {};
+  this.options.new = true;
+  this.options.runValidators = true;
 };
