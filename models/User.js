@@ -24,6 +24,13 @@ const userSchema = new Schema(
     token: {
       type: String,
     },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationCode: {
+      type: String,
+    },
   },
   { timestamps: true },
 );
@@ -35,14 +42,18 @@ userSchema.pre("findOneAndUpdate", addUpdateSettings);
 userSchema.post("findOneAndUpdate", handleSaveError);
 
 export const userSignupSchema = Joi.object({
-  username: Joi.string().required(),
-  email: Joi.string().required().pattern(emailRegexp),
-  password: Joi.string().required(),
+  username: Joi.string().required().trim().min(3).max(10),
+  email: Joi.string().required().trim().pattern(emailRegexp),
+  password: Joi.string().required().min(8),
 });
 
 export const userSigninSchema = Joi.object({
-  email: Joi.string().required().pattern(emailRegexp),
+  email: Joi.string().required().trim().pattern(emailRegexp),
   password: Joi.string().required().min(8),
+});
+
+export const userEmailSchema = Joi.object({
+  email: Joi.string().required().trim().pattern(emailRegexp),
 });
 
 const User = model("user", userSchema);

@@ -28,7 +28,9 @@
     "joi": "^18.2.9",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.11.0",
-    "morgan": "^1.12.1"
+    "morgan": "^1.12.1",
+    "nanoid": "^5.1.16",
+    "nodemailer": "^10.2.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

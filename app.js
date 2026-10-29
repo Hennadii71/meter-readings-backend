@@ -10,7 +10,15 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
-app.use(cors("*"));
+// app.use(cors("*"));
+const isProduction = app.get("env") === "production";
+const corsOptions = {
+  origin: isProduction ? ["https://pokaznyky.net.ua"] : "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: isProduction ? true : false,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use("/api/users", usersRouter);
@@ -22,9 +30,21 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  const isDevelopment = app.get("env") === "development";
+  if (isDevelopment) {
+    console.error(err.stack);
+  } else {
+    console.error(`${err.name}: ${err.message}`);
+  }
+  const status = err.status || 500;
+  let responseMessage = err.message || "Internal Server Error";
+  if (status === 500 && !isDevelopment) {
+    responseMessage =
+      "Something went wrong on our server. Please try again later.";
+  }
   res.status(err.status || 500).json({
-    message: err.message || "Internal Server Error",
+    message: responseMessage,
+    ...(isDevelopment && { stack: err.stack }),
   });
 });
 
