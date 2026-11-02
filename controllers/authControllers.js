@@ -182,7 +182,7 @@ const signin = async (req, res, next) => {
     }
     const passwordCompare = await bcrypt.compare(password, user.password);
     if (!passwordCompare) {
-      throw HttpError(401, "email or password invalid");
+      throw HttpError(401, "Email or password invalid");
     }
     const { _id: id } = user;
     const payload = {

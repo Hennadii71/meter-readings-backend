@@ -3,8 +3,8 @@ import logger from "morgan";
 import cors from "cors";
 import "dotenv/config";
 
-import usersRouter from "./routes/api/users-router.js";
 import authRouter from "./routes/api/auth-router.js";
+import objectRouter from "./routes/api/object-router.js";
 
 const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -21,7 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use("/api/users", usersRouter);
+app.use("/api/objects", objectRouter);
 
 app.use("/api/auth", authRouter);
 
