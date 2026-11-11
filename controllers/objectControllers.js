@@ -5,8 +5,9 @@ import { objectCreateSchema } from "../models/Object.js";
 const getAllObjects = async (req, res, next) => {
   try {
     const { _id: userId } = req.user;
+    console.log(userId);
     const result = await EstateObject.find({ userId });
-    res.json({ result });
+    res.json(result);
   } catch (error) {
     next(error);
   }
@@ -20,7 +21,7 @@ const createObject = async (req, res, next) => {
     }
     const { _id: userId } = req.user;
     const result = await EstateObject.create({ ...req.body, userId });
-    res.status(201).json({ result });
+    res.status(201).json(result);
   } catch (error) {
     next(error);
   }
@@ -52,7 +53,7 @@ const deleteObject = async (req, res, next) => {
     if (!result) {
       throw HttpError(404);
     }
-    res.json({ result });
+    res.json(result);
   } catch (error) {
     next(error);
   }
